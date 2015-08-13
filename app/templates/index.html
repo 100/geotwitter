@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Geo Twitter</title>
+  </head>
+  <body>
+      <h1>This will allow you to see Twitter information on a zip-code of your choice.</h1>
+      {% if wrong %}
+      <h4>Input was wrong.<h4>
+      {% endif %}
+      <h2>Try it:<h2>
+      <form action="" method="post" name="zipcode">
+      {{ form.hidden_tag() }}
+      <p>
+          Please enter your zip-code:<br>
+          {{ form.zipcode(size=5) }}<br>
+      </p>
+      <p><input type="submit" value="Sign In"></p>
+      </form>
+  </body>
+</html>
