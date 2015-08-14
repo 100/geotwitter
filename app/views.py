@@ -8,13 +8,13 @@ def index():
     form = ZipcodeForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            return redirect(url_for('results', zipcode = form.zipcode.data))
+            return redirect(url_for('results', zipcode = form.zipcode.data, search = form.zipcode.search))
         else:
-            return render_template('index.html', form = form, search = search, wrong = True)
+            return render_template('index.html', form = form, wrong = True)
     return render_template('index.html', form = form)
 
 @app.route('/results')
 def results():
     zipcode = request.args.get('zipcode')
     search = request.args.get('search')
-    return render_template('results.html', zipcode = zipcode)
+    return render_template('results.html', zipcode = zipcode, search = search)
