@@ -10,10 +10,11 @@ def index():
         if form.validate_on_submit():
             return redirect(url_for('results', zipcode = form.zipcode.data))
         else:
-            return render_template('index.html', form = form, wrong = True)
+            return render_template('index.html', form = form, search = search, wrong = True)
     return render_template('index.html', form = form)
 
 @app.route('/results')
 def results():
     zipcode = request.args.get('zipcode')
+    search = request.args.get('search')
     return render_template('results.html', zipcode = zipcode)

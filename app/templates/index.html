@@ -11,8 +11,12 @@
       <form action="" method="post" name="zipcode">
       {{ form.hidden_tag() }}
       <p>
-          Please enter your zip-code:<br>
+          Please enter your 5 digit zip-code:<br>
           {{ form.zipcode(size=5) }}<br>
+      </p>
+      <p>
+          Please enter a twitter search query (up to 500 characters):<br>
+          {{ form.search(size=50) }}<br>
       </p>
       <p><input type="submit" value="Sign In"></p>
       </form>
