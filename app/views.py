@@ -11,7 +11,9 @@ def index():
         if form.validate_on_submit():
             searchObject = Search(form.zipcode.data, form.search.data)
             searchObject.populateTweets()
-            return redirect(url_for('results', zipcode = form.zipcode.data, search = form.search.data, searchObject = searchObject))
+            templateObject = {'lat':searchObject.lat, 'long':searchObject.long, 'radius':searchObject.radius,\
+                'sentiment':searchObject.sentiment, 'popularHashtags':searchObject.popularHashtags, 'showcase':searchObject.showcase}
+            return render_template('results.html', zipcode = form.zipcode.data, search = form.search.data, templateObject = templateObject)
         else:
             return render_template('index.html', form = form, wrong = True)
     return render_template('index.html', form = form)
@@ -20,5 +22,5 @@ def index():
 def results():
     zipcode = request.args.get('zipcode')
     search = request.args.get('search')
-    searchObject = request.args.get('searchObject')
-    return render_template('results.html', zipcode = zipcode, search = search, searchObject = searchObject)
+    templateObject = request.args.get('templateObject')
+    return render_template('results.html', zipcode = zipcode, search = search, templateObject = templateObject)
