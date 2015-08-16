@@ -4,6 +4,18 @@
   </head>
   <body>
       <h1>This will allow you to see Twitter information on a zip-code of your choice.</h1>
-      <h2>Results for {{ zipcode }}:<h2>
+      <h2>Results for {{ zipcode }}:</h2>
+      <p>Searched within a {{ searchObject.radius }} km. radius of {{ searchObject.lat }}, {{ searchObject.long }}.</p>
+      <p>The average sentiment was {{ searchObject.sentiment }}.</p><br>
+      <p>The most popular hashtags were:
+        {% for tag in self.popularHashtags %}
+        <ul>{{ tag }}</ul>
+        {% endfor %}</p><br>
+      <p>Some recent tweets on the topic include:
+        {% for tag in self.showcase %}
+          {% for text, user in tag %}
+            <ul>{{ user }} said: {{ text }}</ul><br>
+          {% endfor %}
+        {% endfor %}</p><br>
   </body>
 </html>

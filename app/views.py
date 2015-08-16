@@ -1,4 +1,5 @@
 from app import app
+from twitter import *
 from flask import render_template, redirect, url_for, request
 from forms import ZipcodeForm
 
@@ -8,7 +9,9 @@ def index():
     form = ZipcodeForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            return redirect(url_for('results', zipcode = form.zipcode.data, search = form.zipcode.search))
+            searchObject = Search(form.zipcode.data, form.search.data)
+            searchObject.populateTweets()
+            return redirect(url_for('results', zipcode = form.zipcode.data, search = form.search.data, searchObject = searchObject))
         else:
             return render_template('index.html', form = form, wrong = True)
     return render_template('index.html', form = form)
@@ -17,4 +20,5 @@ def index():
 def results():
     zipcode = request.args.get('zipcode')
     search = request.args.get('search')
-    return render_template('results.html', zipcode = zipcode, search = search)
+    searchObject = request.args.get('searchObject')
+    return render_template('results.html', zipcode = zipcode, search = search, searchObject = searchObject)

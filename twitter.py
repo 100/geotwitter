@@ -1,6 +1,7 @@
 import tweepy
 import requests
 import itertools
+from collections import Counter
 from math import radians, sin, cos, atan2, sqrt, fabs
 from private import *
 
@@ -45,14 +46,12 @@ class Search:
 
         hashtagsRaw = [tweet.entities['hashtags'] for tweet in tweets]
         hashtags = list(chain.from_iterable(hashtagsRaw))
-        frequency = {}
-        for hashtag in hashtags:
-            frequency[hashtag] = hashtags.count(hashtag)
+        self.popularHashtags = Counter(hashtags).most_common(5)
 
         texts = [tweet.text for tweet in tweets]
         self.sentiment = 0.0
         for text in texts:
             param = {'apikey':alchemy_key, 'text':text, 'outputmode':'json'}
             sentiment = requests.get("http://access.alchemyapi.com/calls/text/TextGetTextSentiment", params=param)
-            numeric = (float)(sentiment.json()['docSentiment']['score'])
+            numeric = float(sentiment.json()['docSentiment']['score'])
             self.sentiment = self.sentiment + (numeric / len(texts)) #computes average sentiment
