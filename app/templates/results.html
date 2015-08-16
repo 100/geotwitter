@@ -6,14 +6,22 @@
       <h1>This will allow you to see Twitter information on a zip-code of your choice.</h1>
       <h2>Results for {{ zipcode }}:</h2>
       <p>Searched within a {{ templateObject.radius }} km. radius of {{ templateObject.lat }}, {{ templateObject.long }}.</p><br>
-      <p>The average sentiment was {{ templateObject.sentiment }}.</p><br>
-      <p>The most popular hashtags were:
-        {% for tag in templateObject.popularHashtags %}
-        <ul>#{{ tag }}</ul>
-        {% endfor %}</p><br>
-      <p>Some recent tweets on the topic include:
+      {% if templateObject.showcase|length > 0 %}
+        <p>The average sentiment was {{ templateObject.sentiment }}.</p><br>
+        <p>Some recent tweets on the topic include:
         {% for text, user in templateObject.showcase %}
-            <ul>{{ user }} said: {{ text }}</ul><br>
+          <ul>{{ user }} said: {{ text }}</ul><br>
+        {% endfor %}
+      {% else %}
+        <p>No tweets were found.</p>
+      {% endif %}
+      {% if templateObject.popularHashtags|length > 0 %}
+        <p>The most popular hashtags were:
+        {% for tag in templateObject.popularHashtags %}
+          <ul>#{{ tag }}</ul>
         {% endfor %}</p><br>
+        {% else %}
+          <p>No hashtags were found.</p>
+        {% endif %}
   </body>
 </html>
