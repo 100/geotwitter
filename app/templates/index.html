@@ -1,24 +1,35 @@
 <html>
   <head>
     <title>Geo Twitter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body>
-      <h1>This will allow you to see Twitter information on a zip-code of your choice.</h1>
-      {% if wrong %}
-      <h4>Input was wrong.<h4>
-      {% endif %}
-      <h2>Try it:<h2>
-      <form action="" method="post" name="zipcode">
-      {{ form.hidden_tag() }}
-      <p>
-          Please enter your 5 digit zip-code:<br>
-          {{ form.zipcode(size=5) }}<br>
-      </p>
-      <p>
-          Please enter a twitter search query (up to 50 characters):<br>
-          {{ form.search(size=50) }}<br>
-      </p>
-      <p><input type="submit" value="Sign In"></p>
-      </form>
+      <div class="container-fluid">
+        <div class="jumbotron"
+          <div class="col-sm-12">
+          <h1>This will allow you to see Twitter information on a zip-code of your choice.</h1>
+        </div>
+          <div class="well"</div>
+            {% if wrong %}
+            <h4>Input was wrong.</h4>
+            {% endif %}
+            <h1>Try it:</h1>
+            <form action="" method="post" name="zipcode">
+            {{ form.hidden_tag() }}
+            <p style="font-size: 150%;">
+                Please enter your 5 digit zip-code:<br>
+                {{ form.zipcode(size=5) }}<br>
+            </p>
+            <p style="font-size: 150%;">
+                Please enter a twitter search query (up to 50 characters):<br>
+                {{ form.search(size=50) }}<br>
+            </p>
+            <p><input type="submit" value="Sign In"></p>
+            </form>
+          </div>
+        </div>
+    </div>
   </body>
 </html>
