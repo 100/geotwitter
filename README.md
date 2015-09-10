@@ -8,5 +8,9 @@ This web-app uses Twitter information to provide insight into a particular zip-c
 * Flask web framework
 * Tweepy API
 * AlchemyAPI Sentiment Analysis API
+* Google Maps Geolocation API
 * HTML
 * Bootstrap CSS Framework
+
+## This app implements:
+* The Haversine Formula
